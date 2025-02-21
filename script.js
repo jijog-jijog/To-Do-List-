@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const taskInput = document.getElementById("taskInput");
     const taskDate = document.getElementById("taskDate");
@@ -9,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pendingTasksBtn = document.getElementById("pendingTasks");
     const completedTasksBtn = document.getElementById("completedTasks");
 
-    let tasks = [];
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
     function renderTasks(filter = "all") {
         taskList.innerHTML = "";
@@ -28,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             taskList.appendChild(li);
         });
+
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     }
 
     addTaskBtn.addEventListener("click", () => {
